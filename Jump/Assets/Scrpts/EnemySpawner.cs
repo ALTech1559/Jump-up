@@ -28,6 +28,6 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemy = Instantiate(Enemy);
         enemy.transform.parent = this.transform;
-        enemy.transform.position = new Vector2(Random.Range(LeftPoint.position.x, RightPoint.position.x), LeftPoint.position.y); 
+        enemy.transform.position = new Vector3(Random.Range(LeftPoint.position.x, RightPoint.position.x), LeftPoint.position.y, 1); 
     }
 }

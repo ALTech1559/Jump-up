@@ -7,6 +7,9 @@ public class JumpBonusSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject jumpBonus;
     [SerializeField] private float spawnPause;
+    [SerializeField] private int maximumBonusesCount;
+
+    private int currentBonusesCount = 0;
 
     private void Start()
     {
@@ -18,11 +21,16 @@ public class JumpBonusSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnPause);
-            float x = GameController.GetPlayerPosition.x + Random.Range(-1, 1);
-            float y = GameController.GetPlayerPosition.y + Random.Range(-1, 1);
-            Vector2 spawnPosition = new Vector2(x, y);
-            GameObject bonus = Instantiate(jumpBonus);
-            bonus.transform.position = spawnPosition;
+            if (currentBonusesCount <= maximumBonusesCount)
+            {
+                float x = GameController.GetPlayerPosition.x + Random.Range(-3, 3);
+                float y = GameController.GetPlayerPosition.y + Random.Range(-3, 3);
+                Vector2 spawnPosition = new Vector2(x, y);
+                JumpBonus bonus = Instantiate(jumpBonus).GetComponent<JumpBonus>();
+                bonus.destroyMyself += () => { currentBonusesCount--; };
+                bonus.transform.position = spawnPosition;
+                currentBonusesCount++;
+            }
         }  
     }
 }

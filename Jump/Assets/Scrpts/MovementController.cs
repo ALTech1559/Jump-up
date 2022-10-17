@@ -7,6 +7,7 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float gravityScale;
+    [SerializeField] private float yForceChngingTime;
     [SerializeField] private float jumpForce;
     [SerializeField] private float maximumJumpHeight;
     [SerializeField] private int startJumpsCount;
@@ -14,46 +15,32 @@ public class MovementController : MonoBehaviour
     [SerializeField] private int currentJumpsCount = 0;
     private float yForce = 0;
     private float startJumpPositionY = 0;
-    private float lastClickTime = 0;
+
+    internal delegate void UpdateJumpsCountHandler(int currentJumpsCount);
+    internal event UpdateJumpsCountHandler updateJumpsCount;
+    private PlayerTrail trail;
 
     private void Start()
     {
         currentJumpsCount = startJumpsCount;
+        trail = GetComponent<PlayerTrail>();
         yForce = gravityScale;
+        UpdateJumpsCountInvoke();
     }
 
     private void Update()
     {
-        float x = speed * Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Math.Abs(Time.time - lastClickTime) <= 0.5f)
-            {
-                Jump();
-            }
-
-            lastClickTime = Time.time;
+            Jump();
         }
 
-        if (Input.GetMouseButton(0))
-        {
-
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint( Input.mousePosition);
-            if (mousePosition.x < 0)
-            {
-                x *= -1;
-            }
-
-        }
-        else
-        {
-            x = 0;
-        }
+        float x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
         if(transform.position.y - startJumpPositionY >= maximumJumpHeight)
         {
-            yForce = gravityScale;
+            yForce = Mathf.Lerp(jumpForce, gravityScale, yForceChngingTime);
         }
 
         Vector2 moveDirection = new Vector2(x, yForce * Time.deltaTime);
@@ -65,9 +52,15 @@ public class MovementController : MonoBehaviour
         if (currentJumpsCount > 0)
         {
             currentJumpsCount--;
-            yForce = jumpForce;
+            UpdateJumpsCountInvoke();
+            yForce = Mathf.Lerp(gravityScale, jumpForce, yForceChngingTime);
             startJumpPositionY = transform.position.y;
         }
+    }
+
+    internal void UpdateJumpsCountInvoke()
+    {
+        updateJumpsCount.Invoke(currentJumpsCount);
     }
 
     internal int CurrentJumpsCount

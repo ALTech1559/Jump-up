@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
@@ -26,6 +25,7 @@ public class Player : MonoBehaviour
         if (jumpBonus != null)
         {
             movementController.CurrentJumpsCount += jumpBonus.GetJumpsCount;
+            movementController.UpdateJumpsCountInvoke();
             jumpBonus.DeleteMyself();
         }
     }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 87324521713398417}
   - component: {fileID: 1223470033038451520}
   - component: {fileID: -330426759646501420}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Jump bonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8339326373303115807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2222943, y: -1.3953127, z: -12.381545}
+  m_LocalPosition: {x: -1.2222943, y: -1.3953127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
