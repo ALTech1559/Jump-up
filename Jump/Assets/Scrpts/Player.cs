@@ -1,41 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(MovementController))]
 public class Player : MonoBehaviour
-{  
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float maximumJumpHeight;
-    [SerializeField] private int startJumpsCount;
-    [SerializeField] private int currentJumpsCount = 0;
-    private Rigidbody2D rigidbody;
-    private float yForce = 0;
-    private float startJumpPositionY = 0;
+{
+    [SerializeField] private GameController gameController;
+    private MovementController movementController;
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        currentJumpsCount = startJumpsCount;
+        movementController = GetComponent<MovementController>();
     }
 
-    private void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && currentJumpsCount > 0)
+        if (collision.gameObject.GetComponent<IEnemy>() != null)
         {
-            currentJumpsCount--;
-            yForce = jumpForce;
+            gameController.FinishGame();
         }
 
-        float x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        Vector2 moveDirection = new Vector2(x, yForce);
-        transform.Translate(moveDirection);
-
-        if ()
-    }
-
-    internal void RefreshJumpsCount()
-    {
-        currentJumpsCount = startJumpsCount;
+        JumpBonus jumpBonus = collision.gameObject.GetComponent<JumpBonus>();
+        if (jumpBonus != null)
+        {
+            movementController.CurrentJumpsCount += jumpBonus.GetJumpsCount;
+            jumpBonus.DeleteMyself();
+        }
     }
 }
