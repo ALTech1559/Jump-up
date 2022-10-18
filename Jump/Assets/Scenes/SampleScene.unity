@@ -919,7 +919,7 @@ Transform:
   m_GameObject: {fileID: 2104324383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 4048512204236706596, guid: 9d01085ee800d5741bcb7ea80c516cb9, type: 3}
-  destroyTime: 0.2
+  destroyTime: 0.3
   pauseTime: 0.05
 --- !u!1001 &2586147535527038382
 PrefabInstance:
