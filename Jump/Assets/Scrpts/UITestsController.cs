@@ -6,22 +6,29 @@ using JetBrains.Annotations;
 
 public class UITestsController : MonoBehaviour
 {
-    [SerializeField] private string jumpsCountBaseString;
     [SerializeField] private MovementController player;
     [SerializeField] private TMP_Text jumpsCountText;
+    [SerializeField] private TMP_Text scoreText;
 
     private void OnEnable()
     {
         player.updateJumpsCount += UpdateJumpsCount;
+        GameController.UpdateScoreText += UpdateScore;
     }
 
     private void OnDisable()
     {
         player.updateJumpsCount -= UpdateJumpsCount;
+        GameController.UpdateScoreText -= UpdateScore;
     }
 
     private void UpdateJumpsCount(int jumpsCount)
     {
-        jumpsCountText.text = jumpsCountBaseString + " " + jumpsCount.ToString();
+        jumpsCountText.text = jumpsCount.ToString();
+    }
+
+    private void UpdateScore(int score)
+    {
+        scoreText.text = score.ToString();
     }
 }

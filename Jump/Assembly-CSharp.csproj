@@ -55,18 +55,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scrpts\Bonuses\JumpBonus.cs" />
+     <Compile Include="Assets\Scrpts\Bonuses\JumpBonusSpawner.cs" />
      <Compile Include="Assets\Scrpts\DeathBlock.cs" />
-     <Compile Include="Assets\Scrpts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scrpts\Enemies\EnemySpawner.cs" />
+     <Compile Include="Assets\Scrpts\Enemies\IEnemy.cs" />
+     <Compile Include="Assets\Scrpts\Enemies\StoneEnemy.cs" />
      <Compile Include="Assets\Scrpts\GameController.cs" />
-     <Compile Include="Assets\Scrpts\IEnemy.cs" />
-     <Compile Include="Assets\Scrpts\JumpBonus.cs" />
-     <Compile Include="Assets\Scrpts\JumpBonusSpawner.cs" />
-     <Compile Include="Assets\Scrpts\MovementController.cs" />
-     <Compile Include="Assets\Scrpts\Player.cs" />
-     <Compile Include="Assets\Scrpts\PlayerTrail.cs" />
+     <Compile Include="Assets\Scrpts\Player\MovementController.cs" />
+     <Compile Include="Assets\Scrpts\Player\Player.cs" />
+     <Compile Include="Assets\Scrpts\Player\PlayerTrail.cs" />
      <Compile Include="Assets\Scrpts\PlayerTrailPart.cs" />
      <Compile Include="Assets\Scrpts\ScenesController.cs" />
-     <Compile Include="Assets\Scrpts\StoneEnemy.cs" />
      <Compile Include="Assets\Scrpts\UITestsController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
