@@ -804,10 +804,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb7e2916b2a9894886f248dff125587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpBonus: {fileID: 8339326373303115807, guid: 8977a408804d6574a9996ad3b259bfe2,
-    type: 3}
+  maximumSpawnRadius: 4
+  minimumSpawnRadius: 2
+  bonus: {fileID: 8339326373303115807, guid: 8977a408804d6574a9996ad3b259bfe2, type: 3}
   spawnPause: 1
   maximumBonusesCount: 5
+  currentBonusesCount: 0
 --- !u!4 &1236482235
 Transform:
   m_ObjectHideFlags: 0

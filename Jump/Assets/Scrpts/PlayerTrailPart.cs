@@ -5,12 +5,22 @@ using UnityEngine;
 public class PlayerTrailPart : MonoBehaviour
 {
     [SerializeField] private float scaleChanging;
-    private void Update()
+    [SerializeField] private float scalePause;
+
+    private void Start()
     {
-        if (transform.localScale.x > 0)
+        StartCoroutine(Scale());
+    }
+
+    private IEnumerator Scale()
+    {
+        while (true)
         {
-            transform.localScale = new Vector2(transform.localScale.x - scaleChanging, transform.localScale.y - scaleChanging);
+            if (transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector2(transform.localScale.x - scaleChanging, transform.localScale.y - scaleChanging);
+            }
+            yield return new WaitForSeconds(scalePause);
         }
-      
     }
 }

@@ -55,8 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scrpts\Bonuses\JumpBonus.cs" />
-     <Compile Include="Assets\Scrpts\Bonuses\JumpBonusSpawner.cs" />
+     <Compile Include="Assets\Scrpts\Bonuses\IBonus.cs" />
+     <Compile Include="Assets\Scrpts\Bonuses\IBonusSpawner.cs" />
+     <Compile Include="Assets\Scrpts\Bonuses\Jump\JumpBonus.cs" />
+     <Compile Include="Assets\Scrpts\Bonuses\Jump\JumpBonusSpawner.cs" />
      <Compile Include="Assets\Scrpts\DeathBlock.cs" />
      <Compile Include="Assets\Scrpts\Enemies\EnemySpawner.cs" />
      <Compile Include="Assets\Scrpts\Enemies\IEnemy.cs" />
