@@ -1,11 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
+    internal enum HardMode
+    {
+        Easy, 
+        Medium, 
+        Hard
+    }
+
+    [Header("Hard mode ranging")]
+    [SerializeField] private int mediumLowRange;
+    [SerializeField] private int hardLowRange;
+
+    [Header("Score settings")]
     [SerializeField] private float scoreChangingTiming;
     [SerializeField] private int scoreChangingValue;
+
+    [Header("Player")]
     [SerializeField] private Player player;
     private delegate void GameFinishHandler();
     private event GameFinishHandler GameFinish;
@@ -16,8 +31,11 @@ public class GameController : MonoBehaviour
     private static GameController instance;
     private int score = 0;
 
+    private HardMode hardMode;
+
     private void OnEnable()
     {
+        hardMode = HardMode.Easy;
         instance = this;   
         scenesController = new ScenesController();
         GameFinish += ReloadCurrnetScene;
@@ -45,15 +63,54 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForSeconds(scoreChangingTiming);
             score += scoreChangingValue;
+            RangeHardMode();
             UpdateScoreText.Invoke(score);
         }
     }
 
-    public static Vector2 GetPlayerPosition
+    private void RangeHardMode()
+    {
+        if (score < mediumLowRange)
+        {
+            hardMode = HardMode.Easy;
+        }
+        else if (score < hardLowRange)
+        {
+            hardMode = HardMode.Medium;
+        }
+        else
+        {
+            hardMode = HardMode.Hard;
+        }
+    }
+
+    internal static Vector2 GetPlayerPosition
     {
         get
         {
             return instance.player.transform.position;
+        }
+    }
+
+    internal static int Score
+    {
+        get
+        {
+            return instance.score;
+        }
+        set
+        {
+            instance.score = value;
+            instance.RangeHardMode();
+            UpdateScoreText.Invoke(instance.score);
+        }
+    }
+
+    internal static HardMode GameMode
+    {
+        get
+        {
+            return instance.hardMode;
         }
     }
 }

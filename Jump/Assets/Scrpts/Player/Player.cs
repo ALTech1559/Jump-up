@@ -21,12 +21,20 @@ public class Player : MonoBehaviour
             gameController.FinishGame();
         }
 
-        JumpBonus jumpBonus = collision.gameObject.GetComponent<JumpBonus>();
-        if (jumpBonus != null)
+        JumpBonus jumpBonus;
+
+        if (collision.gameObject.TryGetComponent<JumpBonus>(out jumpBonus))
         {
             movementController.CurrentJumpsCount += jumpBonus.GetJumpsCount;
             movementController.UpdateJumpsCountInvoke();
             jumpBonus.DeleteMyself();
+        }
+
+        CoinBonus coinBonus;
+        if (collision.gameObject.TryGetComponent<CoinBonus>(out coinBonus))
+        {
+            GameController.Score += coinBonus.GetCoinsCount;
+            coinBonus.DeleteMyself();
         }
     }
 }

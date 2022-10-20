@@ -13,7 +13,7 @@ public abstract class IBonusSpawner : MonoBehaviour
     [SerializeField] private float spawnPause;
     [SerializeField] private int maximumBonusesCount;
 
-    [SerializeField] private int currentBonusesCount = 0;
+    private int currentBonusesCount = 0;
 
     internal virtual IEnumerator SpawnBonus<T>() where T : IBonus
     {
